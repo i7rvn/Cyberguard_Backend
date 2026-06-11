@@ -5,7 +5,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from config import settings
 
-pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# ✅ تغيير من bcrypt إلى pbkdf2_sha256 لتجنب مشكلة 72 بايت
+pwd_ctx = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 def hash_password(pwd: str) -> str:
     return pwd_ctx.hash(pwd)
